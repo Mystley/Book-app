@@ -5,6 +5,7 @@ import MyButton from "./MyButton";
 
 export default function Home() {
     const [books, setBooks] = useState([])
+    const [likedBooks, setLikedBooks] = useState({})
     const [error, setError] = useState(null)
     useEffect(() => {
         const fetchBooks = async () => {
@@ -24,6 +25,15 @@ export default function Home() {
         }
         fetchBooks()
     }, [])
+
+    function transferBook(id){
+        setLikedBooks((oldState) => ({
+            ...oldState,
+            [id]: !oldState[id] //toggle like button to liked
+        }))
+
+    }
+    
     return (
         <View style={styles.container}>
             <View>
@@ -40,7 +50,11 @@ export default function Home() {
                             <View style={styles.yearAndAdd}>
                                 <Text style={styles.bookYear}>{item.work.first_publish_year}</Text>
                                 {/* <Button title="Like" /> */}
-                                <MyButton title={"Like"} onPress={console.log('button pressed')} />
+                                <MyButton 
+                                    title={likedBooks[item.work.key] ? "Liked": "Like"}
+                                    onPress={() => transferBook(item.work.key)}
+                                    color={likedBooks[item.work.key] ? "lightgreen" : "orange"}
+                                />
                             </View>
                         </View>
                     </View>
@@ -49,7 +63,6 @@ export default function Home() {
                 )}
                 keyExtractor={item => item.work.key}
             />
-            <Text>#content for home</Text>
         </View>
     )
 }

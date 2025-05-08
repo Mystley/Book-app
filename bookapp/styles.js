@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection:"column",
         // alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
     },
     line : {
         margin:10,
@@ -36,8 +36,8 @@ export default StyleSheet.create({
     },
     button: {
         alignContent: "right",
-        width: 50,
-        borderColor: "orange",
+        width: 60,
+        // borderColor: "orange",
         color: "black",
         borderWidth: 2,
     },
